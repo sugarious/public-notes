@@ -1,0 +1,11 @@
+POST http://localhost:3000/notes
+
+Content-Type: application/json
+
+{
+    "title": "Hello World",
+    "content": "hehe"
+}
+
+###Another
+GET http://localhost:3000/notes

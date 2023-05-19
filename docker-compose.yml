@@ -1,0 +1,30 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.server
+    ports:
+      - '3000:3000'  # Map host port 3000 to container port 3000 (adjust as needed)
+    volumes:
+      - ./server:/app  # Mount the server code directory into the container
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.client
+    ports:
+      - '80:3000'  # Map host port 80 to container port 3000 (adjust as needed)
+    volumes:
+      - ./client:/app  # Mount the client code directory into the container
+    depends_on:
+      - server
+
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - '5435:5432'

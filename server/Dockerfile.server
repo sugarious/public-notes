@@ -1,0 +1,19 @@
+FROM node:latest
+
+WORKDIR /app
+
+# Copy and Run the installation
+COPY package*.json .
+RUN npm install
+
+
+# copy all from here to that dir
+COPY . .
+
+
+# Prisma setup
+RUN npx prisma generate
+RUN npm prisma migrate dev --name migation
+
+
+CMD ["npm", "run", "dev"]
